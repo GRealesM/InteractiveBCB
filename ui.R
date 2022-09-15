@@ -9,6 +9,8 @@
 
 library(shiny)
 library(shinydashboard)
+library(fontawesome)
+library(knitr)
 
 ##############################
 ###       FUNCTIONS        ###
@@ -62,6 +64,23 @@ dashboardPage(
   dashboardHeader(title = "Interactive BCB",
                   dropdownMenu( type = 'message',icon = icon("github"), badgeStatus = NULL, headerText = "Check out the Github page!", messageItem(from = 'Github', message = "", icon = icon("github"), href = "https://github.com/GRealesM/InteractiveBCB"))
                   ),
-  dashboardSidebar(),
-  dashboardBody()
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Delta Plots", tabName = "dplots", icon = icon("signal")),
+      sliderInput("PCDelta", label = "Feature / PC:", min=1, max=14, value = 1),
+      menuItem("Projection Table", tabName = "projtables", icon = icon("rectangle-list")),
+      menuItem("Help", tabName = "Help", icon = icon("book-open", lib = "font-awesome"))
+    )
+  ),
+  
+  
+  dashboardBody(
+    tabItems(
+      tabItem("dplots", fluidRow(column(12, box(plotlyOutput("Delta") , width = 12, height = "2100px") ) ) ),
+      tabItem("projtables", fluidRow(column(div(style = "font-size: 10px;
+                   padding: 20px 0px;
+                   margin:0%"), DT::dataTableOutput("ptables"), width = 12))),
+      tabItem("Help", fluidRow(column(12, HTML(markdown::markdownToHTML(knit("help.Rmd", quiet = TRUE))))))
+    )
+  )
 )

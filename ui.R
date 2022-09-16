@@ -66,9 +66,16 @@ dashboardPage(
                   ),
   dashboardSidebar(
     sidebarMenu(
+      HTML(paste(p( HTML('&nbsp;'), strong("_______________________")))),
+      HTML(paste( p( HTML('&nbsp;'), strong("Single Feature visualisation")))),
       menuItem("Delta Plots", tabName = "dplots", icon = icon("signal")),
       menuItem("Projection Table", tabName = "projtables", icon = icon("rectangle-list")),
       sliderInput("PCDelta", label = "Feature / PC:", min=1, max=14, value = 1),
+      HTML(paste(p( HTML('&nbsp;'), strong("_______________________")))),
+      HTML(paste( p( HTML('&nbsp;'), strong("Multiple Feature visualisation")))),
+      menuItem("Biplots", tabName = "biplots", icon = icon("share-nodes")),
+      sliderInput("b1", label = "Feature on X axis", min=1, max=14, value = 1),
+      sliderInput("b2", label = "Feature on Y axis", min=1, max=14, value = 2),
       HTML(paste(p( HTML('&nbsp;'), strong("_______________________")))),
       menuItem("Dataset info", tabName= "dstable", icon = icon("flask")), 
       menuItem("Help", tabName = "Help", icon = icon("book-open", lib = "font-awesome"))
@@ -85,6 +92,7 @@ dashboardPage(
       tabItem("dstable", fluidRow(column(div(style = "font-size: 10px;
                    padding: 20px 0px;
                    margin:0%"), DT::dataTableOutput("dstables"), width = 12))),
+      tabItem("biplots", fluidRow(column(12, box(plotlyOutput("biplot") , width = 12) ) ) ),
       tabItem("Help", fluidRow(column(12, HTML(markdown::markdownToHTML(knit("help.Rmd", quiet = TRUE))))))
     )
   )

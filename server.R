@@ -36,12 +36,15 @@ shinyServer(function(input, output, session) {
       ggplotly(make.delta.plot(delta.dt, input$PCDelta), height = dpheight),
     )
     pc.ptable <- pt[PC == paste0("PC", input$PCDelta)]
-    pc.ptable <- pc.ptable[, .(PC, Label, Trait_ID_2.0, Delta, Var.Delta, P, FDR.PC, stars)]
+    pc.ptable <- pc.ptable[, .(PC, Label, Trait_class, Delta, Var.Delta, P, FDR.PC, stars)]
     output$ptables <- renderDT({ 
-      DT::datatable(pc.ptable, escape = F, extensions = c("Buttons"), options = list(dom = "Bfrtip", pageLength =15),rownames = F, filter='top') # CONTINUE HERE. ADD Download buttons and figure how to compress numbers and column widths
+      DT::datatable(pc.ptable, escape = F, rownames = F, filter='top', caption = paste0('Projection info for PC', input$PCDelta, '.'), extensions = c("Buttons"), options = list(dom = "Bfrtip", pageLength =10, paging = F, scroller = T, scrollX= T, autoWidth = T,  buttons = list('copy', list(extend = 'csv',text='Download .csv', filename=paste0("Projection_table_PC", input$PCDelta)))))
       })
   })
 
+  output$dstables <- renderDT({
+    DT::datatable(qc, escape = F, rownames = F, filter = 'top', autoHideNavigation = F, caption = paste0("General information on the significant (FDR.overall < 1%) projected GWAS summary statistics dataset"), options = list(pagelength = 10, scroller = T, scrollX = T))
+  })
 
   
   

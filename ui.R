@@ -67,8 +67,10 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Delta Plots", tabName = "dplots", icon = icon("signal")),
-      sliderInput("PCDelta", label = "Feature / PC:", min=1, max=14, value = 1),
       menuItem("Projection Table", tabName = "projtables", icon = icon("rectangle-list")),
+      sliderInput("PCDelta", label = "Feature / PC:", min=1, max=14, value = 1),
+      HTML(paste(p( HTML('&nbsp;'), strong("_______________________")))),
+      menuItem("Dataset info", tabName= "dstable", icon = icon("flask")), 
       menuItem("Help", tabName = "Help", icon = icon("book-open", lib = "font-awesome"))
     )
   ),
@@ -80,6 +82,9 @@ dashboardPage(
       tabItem("projtables", fluidRow(column(div(style = "font-size: 10px;
                    padding: 20px 0px;
                    margin:0%"), DT::dataTableOutput("ptables"), width = 12))),
+      tabItem("dstable", fluidRow(column(div(style = "font-size: 10px;
+                   padding: 20px 0px;
+                   margin:0%"), DT::dataTableOutput("dstables"), width = 12))),
       tabItem("Help", fluidRow(column(12, HTML(markdown::markdownToHTML(knit("help.Rmd", quiet = TRUE))))))
     )
   )

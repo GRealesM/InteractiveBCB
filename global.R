@@ -5,7 +5,8 @@ library(knitr)
 library(plotly)
 library(data.table)
 library(DT)
-
+library(heatmaply)
+library(kableExtra)
 
 make.delta.plot <- function(dt, PC){
     fplot <- ggplot(dt, aes(x = reorder(Label, -Delta), y = Delta, ymin=Delta-ci, ymax=Delta+ci, colour = Trait_class))+

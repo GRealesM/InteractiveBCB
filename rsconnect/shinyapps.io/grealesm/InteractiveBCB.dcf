@@ -5,9 +5,9 @@ account: grealesm
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7031832
-bundleId: 6309989
+bundleId: 6324198
 url: https://grealesm.shinyapps.io/InteractiveBCB/
-when: 1663350551.21694
-lastSyncTime: 1663350551.21697
+when: 1663773303.16885
+lastSyncTime: 1663773303.16886
 asMultiple: FALSE
 asStatic: FALSE

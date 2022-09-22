@@ -76,7 +76,6 @@ dashboardPage(
       menuItem("Biplots", tabName = "biplots", icon = icon("share-nodes")),
       sliderInput("b1", label = "Feature on X axis", min=1, max=14, value = 1),
       sliderInput("b2", label = "Feature on Y axis", min=1, max=14, value = 2),
-      HTML(paste(p( HTML('&nbsp;'), strong("_______________________")))),
       HTML(paste( p( HTML('&nbsp;'), strong("Heatmaps")))),
       menuItem("Blood cells (Chen)", tabName = "hmbc", icon = icon("droplet")),
       menuItem("By trait class", tabName = "hmtc", icon = icon("dice-d6")),
